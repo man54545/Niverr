@@ -1,10 +1,15 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useEffect } from 'react';
 
 const Profile = () => {
 
   const loginData = JSON.parse(localStorage.getItem('currentUser'));
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
 
   return (
     <>

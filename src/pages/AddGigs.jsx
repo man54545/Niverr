@@ -4,10 +4,12 @@ import Footer from '../components/Footer';
 import BACKEND_URL from '../Api';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const AddGigs = () => {
 
     const navigate = useNavigate();
+    const [err,seterr] = useState("");
     const loginData = JSON.parse(localStorage.getItem('currentUser'));
     const [img,setimg] = useState([]);
     const [data,setdata] = useState({
@@ -34,27 +36,86 @@ const AddGigs = () => {
     }
     
     const formSubmit = async (e) =>{
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', data.title);
-        formData.append('desc', data.desc);
-        formData.append('shortTitle', data.shortTitle);
-        formData.append('shortDesc', data.shortDesc);
-        formData.append('price', data.price);
-        formData.append('deliveryTime', data.deliveryTime);
-        formData.append('cat', data.cat);
-        formData.append('revisionNumber', data.revisionNumber);
-        for(let i = 0; i < img.length; i++){
-            formData.append('images', img[i])
+        if(!data.title){
+            e.preventDefault();
+            seterr('title required.');
+            document.getElementById('title').focus();
         }
-        let adata = await axios.post(BACKEND_URL+'gig/add_gig/'+loginData._id,formData);
-        if(adata.status === 200){
-            navigate("/gigs");
+        else if(!data.cat){
+            e.preventDefault();
+            seterr('category required.');
+            document.getElementById('cat').focus();
+        }
+        else if(img.length === 0){
+            e.preventDefault();
+            seterr('images required.');
+            document.getElementById('images').focus();
+        }
+        else if(!data.price){
+            e.preventDefault();
+            seterr('price required.');
+            document.getElementById('price').focus();
+        }
+        else if(!data.desc){
+            e.preventDefault();
+            seterr('description required.');
+            document.getElementById('desc').focus();
+        }
+        else if(!data.shortTitle){
+            e.preventDefault();
+            seterr('short title required.');
+            document.getElementById('shortTitle').focus();
+        }
+        else if(!data.shortDesc){
+            e.preventDefault();
+            seterr('short description required.');
+            document.getElementById('shortDesc').focus();
+        }
+        else if(!data.deliveryTime){
+            e.preventDefault();
+            seterr('delivery time required.');
+            document.getElementById('deliveryTime').focus();
+        }
+        else if(!data.revisionNumber){
+            e.preventDefault();
+            seterr('revision number required.');
+            document.getElementById('revisionNumber').focus();
         }
         else{
-            navigate("/add_gigs");
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('title', data.title);
+            formData.append('desc', data.desc);
+            formData.append('shortTitle', data.shortTitle);
+            formData.append('shortDesc', data.shortDesc);
+            formData.append('price', data.price);
+            formData.append('deliveryTime', data.deliveryTime);
+            formData.append('cat', data.cat);
+            formData.append('revisionNumber', data.revisionNumber);
+            for(let i = 0; i < img.length; i++){
+                formData.append('images', img[i])
+            }
+            let adata = await axios.post(BACKEND_URL+'gig/add_gig/'+loginData._id,formData);
+            if(adata.status === 200){
+                navigate("/gigs");
+            }
+            else{
+                navigate("/add_gigs");
+            }
         }
     }
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+        if(loginData){
+            if(!loginData.isSeller){
+                navigate('/');
+            }
+        }
+        else{
+            navigate('/');
+        }
+    }, []);
 
     return (
         <>
@@ -66,6 +127,7 @@ const AddGigs = () => {
                         <h2 className="mb-0 fw-8">Add Gig</h2>
                         <Link to="/gigs" className="bg-color-2 btn text-white border-0 py-2 px-3">View Gigs</Link>
                     </div>
+                    <p className='text-danger fw-8'>{err}</p>
                     <form className="row" onSubmit={formSubmit} encType='multipart/form-data'>
                         <div className="col-md-6">
                             <div className="gig-inner">
@@ -117,9 +179,9 @@ const AddGigs = () => {
                             </div>
                             <div className="mb-4">
                                 <label className="mb-3">Add Features</label>
-                                <input type="text" name="features" id="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. page design" />
-                                <input type="text" name="features" id="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. file uploading" />
-                                <input type="text" name="features" id="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. setting up a domain" />
+                                <input type="text" name="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. page design" />
+                                <input type="text" name="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. file uploading" />
+                                <input type="text" name="features" className="form-control py-2 px-3 mb-3" placeholder="e.g. setting up a domain" />
                             </div>
                         </div>
                         <input type="submit" name="submit" id="submit" className="btn text-white bg-color-2 w-100 py-2 px-3" value="Create" />

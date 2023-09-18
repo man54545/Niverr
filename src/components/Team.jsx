@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Team = () => {
   return (
@@ -24,7 +25,7 @@ const Team = () => {
                                 <p className="text-white ps-3 mb-0">Lorem ipsum dolor, sit ametamememet consec elit. Sequi veritatis maxime.</p>
                             </li>
                         </ul>
-                        <a href=" " className="text-white px-3 mt-3 btn bg-color-2">Explore Niverr Business</a>
+                        <Link to="/business" className="text-white px-3 mt-3 btn bg-color-2">Explore Niverr Business</Link>
                     </div>
                     <div className="col-lg-6">
                         <img src="/assets/img/business-desktop-870-x1.png" alt="team_img" className='img-fluid d-flex mx-auto' />

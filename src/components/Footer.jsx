@@ -28,12 +28,12 @@ const Footer = () => {
                         <div className="footer-inner mb-5 mb-lg-0">
                             <h5 className="fw-8 mb-4">About</h5>
                             <ul className="ps-0 mb-0">
-                                <li><span className="pb-3 d-block text-secondary">Press & News</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Partnerships</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Private Policy</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Terms of Service</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Contact Sales</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Investor Relations</span></li>
+                                <li><Link to="/news"><span className="pb-3 d-block text-secondary">Press & News</span></Link></li>
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Partnerships</span></Link></li> */}
+                                <li><Link to="/policy"><span className="pb-3 d-block text-secondary">Private Policy</span></Link></li>
+                                <li><Link to="/service"><span className="pb-3 d-block text-secondary">Terms of Service</span></Link></li>
+                                <li><Link to="/contact"><span className="pb-3 d-block text-secondary">Contact Sales</span></Link></li>
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Investor Relations</span></Link></li> */}
                             </ul>
                         </div>
                     </div>
@@ -41,28 +41,31 @@ const Footer = () => {
                         <div className="footer-inner mb-5 mb-lg-0">
                             <h5 className="fw-8 mb-4">Support</h5>
                             <ul className="ps-0 mb-0">
-                                <li><span className="pb-3 d-block text-secondary">Help & Support</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Trust & Safty</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Selling on Niverr</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Buying on Niverr</span></li>
+                                <li><Link to="/policy"><span className="pb-3 d-block text-secondary">Help & Support</span></Link></li>
+                                <li><Link to=""><span className="pb-3 d-block text-secondary">Trust & Safty</span></Link></li>
+                                <li><Link to=""><span className="pb-3 d-block text-secondary">Selling on Niverr</span></Link></li>
+                                <li><Link to=""><span className="pb-3 d-block text-secondary">Buying on Niverr</span></Link></li>
                             </ul>
                         </div>
                     </div>
                     <div className="w-20">
                         <div className="footer-inner mb-5 mb-sm-0">
-                            <h5 className="fw-8 mb-4">Community</h5>
+                            <h5 className="fw-8 mb-4">Pages</h5>
                             <ul className="ps-0 mb-0">
-                                <li><span className="pb-3 d-block text-secondary">Customer Stories</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Community Hub</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Events</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Blog</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Podcast</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Become a Seller</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Invite a Friend</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Community Standard</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Influences</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Affiriates</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Forun</span></li>
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Customer Stories</span></Link></li> */}
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Community Hub</span></Link></li> */}
+                                <li><Link to="/register"><span className="pb-3 d-block text-secondary">Register</span></Link></li>
+                                <li><Link to="/login"><span className="pb-3 d-block text-secondary">Login</span></Link></li>
+                                <li><Link to="/event"><span className="pb-3 d-block text-secondary">Events</span></Link></li>
+                                <li><Link to="/blog"><span className="pb-3 d-block text-secondary">Blog</span></Link></li>
+                                <li><Link to="/order"><span className="pb-3 d-block text-secondary">Orders</span></Link></li>
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Podcast</span></Link></li> */}
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Become a Seller</span></Link></li> */}
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Invite a Friend</span></Link></li> */}
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Community Standard</span></Link></li> */}
+                                <li><Link to="/error"><span className="pb-3 d-block text-secondary">Error Page</span></Link></li>
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Affiriates</span></Link></li> */}
+                                {/* <li><Link to=""><span className="pb-3 d-block text-secondary">Forun</span></Link></li> */}
                             </ul>
                         </div>
                     </div>
@@ -70,15 +73,15 @@ const Footer = () => {
                         <div className="footer-inner">
                             <h5 className="fw-8 mb-4">More From Niverr</h5>
                             <ul className="ps-0 mb-0">
-                                <li><span className="pb-3 d-block text-secondary">Niverr Business</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Niverr Pro</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Get Inspired</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Niverr Logo Maker</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Learn</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Niverr Select</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Niverr Workspace</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Clear Voice</span></li>
-                                <li><span className="pb-3 d-block text-secondary">Working Not Working</span></li>
+                                <li><Link to="/business"><span className="pb-3 d-block text-secondary">Niverr Business</span></Link></li>
+                                {/* <li><Link><span className="pb-3 d-block text-secondary">Niverr Pro</span></Link></li> */}
+                                {/* <li><Link to="/policy"><span className="pb-3 d-block text-secondary">Get Inspired</span></Link></li> */}
+                                {/* <li><Link><span className="pb-3 d-block text-secondary">Niverr Logo Maker</span></Link></li> */}
+                                {/* <li><Link><span className="pb-3 d-block text-secondary">Learn</span></Link></li> */}
+                                <li><Link to="/fiverr_select"><span className="pb-3 d-block text-secondary">Niverr Select</span></Link></li>
+                                <li><Link to="/work"><span className="pb-3 d-block text-secondary">Niverr Workspace</span></Link></li>
+                                {/* <li><Link><span className="pb-3 d-block text-secondary">Clear Voice</span></Link></li> */}
+                                {/* <li><Link><span className="pb-3 d-block text-secondary">Working Not Working</span></Link></li> */}
                             </ul>
                         </div>
                     </div>
@@ -86,15 +89,15 @@ const Footer = () => {
             </div>
         </footer>
 
-        <div className="copy_right py-sm-5">
+        <div className="copy_right pb-sm-4">
             <div className="container">
                 <div className="d-sm-flex flex-wrap align-items-center justify-content-between text-center">
-                    <p className="lead mb-sm-0 mb-4">@ Niverr International Ltd. 2023</p>
+                    <p className="mb-sm-0 mb-4">@ Niverr International Ltd. 2023</p>
                     <div className="social-icons">
                         <span className="text-dark"><i className="bi bi-facebook fs-4"></i></span>
                         <span className="text-dark ps-3"><i className="bi bi-linkedin fs-4"></i></span>
                         <span className="text-dark ps-3"><i className="bi bi-youtube fs-4"></i></span>
-                        <span className="text-dark ps-3"><i className="bi bi-twitter fs-4"></i></span>
+                        {/* <span className="text-dark ps-3"><i className="bi bi-twitter fs-4"></i></span> */}
                         <span className="text-dark ps-3"><i className="bi bi-instagram fs-4"></i></span>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Sliders from "react-slick";
 import axios from 'axios';
 import BACKEND_URL from "../Api";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import io from "socket.io-client";
 
 const Detail = () => {
@@ -27,10 +27,16 @@ const Detail = () => {
 
     const fetchdata = async()=>{
         let data = await axios.get(BACKEND_URL+'gig/view_gig/'+id);
-        setdata(data.data);
-        setuser(data.data.userId);
-        setfeacher(data.data.feachers);
-        setImages(data.data.images);
+        console.log(data);
+        if(data.status === 200){
+            setdata(data.data);
+            setuser(data.data.userId);
+            setfeacher(data.data.feachers);
+            setImages(data.data.images);
+        }
+        else{
+            Navigate('/');
+        }
     }
 
     const fetchdata2 = async () =>{
@@ -42,25 +48,25 @@ const Detail = () => {
         setrating(e.target.value);
     }
 
-    const addOrder = async (e) =>{
-        let ffdata = {
-            gigId : id,
-            sellerId : data.userId,
-            buyerId : loginData._id,
-            img : data.images[0],
-            title : data.title,
-            price : data.price,
-            payment : data.price,
-        }
-        let adata = await axios.post(BACKEND_URL+'order/add_order',ffdata);
-        if(adata.status === 200){
-            socket.emit('fetchNewGig', {userId : data.userId});
-            socket.emit('fetchNewOrder', {gigId : id});
-        }
-        else{
-            e.preventDefault();
-        }
-      }
+    // const addOrder = async (e) =>{
+    //     let ffdata = {
+    //         gigId : id,
+    //         sellerId : data.userId,
+    //         buyerId : loginData._id,
+    //         img : data.images[0],
+    //         title : data.title,
+    //         price : data.price,
+    //         payment : data.price,
+    //     }
+    //     let adata = await axios.post(BACKEND_URL+'order/add_order',ffdata);
+    //     if(adata.status === 200){
+    //         socket.emit('fetchNewGig', {userId : data.userId});
+    //         socket.emit('fetchNewOrder', {gigId : id});
+    //     }
+    //     else{
+    //         e.preventDefault();
+    //     }
+    //   }
 
     const FinalPay = async (e) =>{
         try {
@@ -115,8 +121,14 @@ const Detail = () => {
     }
 
     useEffect(()=>{
-        fetchdata();
-        fetchdata2();
+        window.scrollTo(0, 0);
+        if(id){
+            fetchdata();
+            fetchdata2();
+        }
+        else{
+            Navigate('/');
+        }
     },[]);
 
     const settings = {
@@ -179,35 +191,35 @@ const Detail = () => {
                                         </p>
                                     : ''}
                                     <div className='position-relative'>
-                                        <button className="px-4 py-2 border-dark bg-white btn" onMouseOver={Contact} onMouseOut={ContactOut}>Contact Me</button>
-                                        <div className='p-3 ms-3 bg-color-2 text-white conact-detail position-absolute' id='conact-detail' style={{borderRadius:'10px'}}>
+                                        <button className="px-4 py-2 border-dark bg-white btn">Contact Me</button>
+                                        {/* <button className="px-4 py-2 border-dark bg-white btn" onMouseOver={Contact} onMouseOut={ContactOut}>Contact Me</button> */}
+                                        {/* <div className='p-3 ms-3 bg-color-2 text-white conact-detail position-absolute' id='conact-detail' style={{borderRadius:'10px'}}>
                                             <p className='mb-0'>Phone No :- {user.phone}</p>
                                             <p className='mb-0'>Email :- {user.email}</p>
-
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
-                            <div className="b-1 p-4 br-1 mb-5 row justify-content-between">
-                                <div className="col-lg-6 mb-3">
+                            <div className="b-1 p-4 br-1 m-sm-0 m-1 row justify-content-between">
+                                <div className="col-6 mb-3">
                                     <p className="lead mb-0 text-secondary">From</p>
                                     <p className="lead mb-0 fw-8">{user.country}</p>
                                 </div>
-                                <div className="col-lg-6 mb-3">
+                                <div className="col-6 mb-3">
                                     <p className="lead mb-0 text-secondary">Member since</p>
                                     <p className="lead mb-0 fw-8">{month} {new Date(date).getFullYear()}</p>
                                 </div>
-                                <div className="col-lg-6 mb-3">
-                                    <p className="lead mb-0 text-secondary">Avg. response time</p>
-                                    <p className="lead mb-0 fw-8">4 hours</p>
+                                <div className="col-6 mb-3">
+                                    <p className="lead mb-0 text-secondary">Languages</p>
+                                    <p className="lead mb-0 fw-8">English</p>
                                 </div>
-                                <div className="col-lg-6 mb-3">
+                                <div className="col-6 mb-3">
                                     <p className="lead mb-0 text-secondary">Last delivery</p>
                                     <p className="lead mb-0 fw-8">{data.deliveryTime} day</p>
                                 </div>
-                                <div className="col-lg-6 mb-3">
-                                    <p className="lead mb-0 text-secondary">Languages</p>
-                                    <p className="lead mb-0 fw-8">English</p>
+                                <div className="col-sm-6 mb-3">
+                                    <p className="lead mb-0 text-secondary">Avg. response time</p>
+                                    <p className="lead mb-0 fw-8">4 hours</p>
                                 </div>
                                 <hr />
                                 <p className="mb-0">{user.desc}</p>
@@ -263,7 +275,7 @@ const Detail = () => {
                             : ''}
                         </div>
                         <div className="col-lg-5">
-                            <div className="detail-box b-1 br-1 p-4 position-sticky" style={{top: '150px'}}>
+                            <div className="detail-box b-1 br-1 p-4 mt-5 mt-lg-0 position-sticky" style={{top: '150px'}}>
                                 <div className="d-flex flex-wrap align-items-center justify-content-between mb-3">
                                     <h5 className="fw-8 mb-0">{data.shortTitle}</h5>
                                     <h3 className="mb-0">$ {data.price}</h3>

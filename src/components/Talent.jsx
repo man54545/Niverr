@@ -28,7 +28,8 @@ const Talent = () => {
                         </ul>
                     </div>
                     <div className="col-lg-7">
-                        <img src="/assets/img/selling-proposition-still-1400-x1.png" alt="talent_img" className='img-fluid mx-auto d-flex' />
+                        {/* <img src="/assets/img/selling-proposition-still-1400-x1.png" alt="talent_img" className='img-fluid mx-auto d-flex' /> */}
+                        <div className='talent-img'></div>
                     </div>
                 </div>
             </div>

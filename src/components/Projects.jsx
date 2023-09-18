@@ -8,7 +8,12 @@ const Projects = () => {
 
     const fetchdata = async ()=>{
         let fdata = await axios.get(BACKEND_URL+'gig/view_gig_limit');
-        setdata(fdata.data);
+        if(fdata.status === 200){
+            setdata(fdata.data);
+        }
+        else{
+            setdata([]);
+        }
     }
 
     useEffect(()=>{
@@ -17,12 +22,12 @@ const Projects = () => {
 
   return (
     <>
-        <section className="projects py-5">
+        <section className="projects pt-5">
             <div className="container">
                 <ul className="row align-items-center justify-content-center mb-0 ps-0">
                     {data.map((v,i)=>{
                         return (
-                            <li className="col-lg-3 col-sm-6" key={i}>
+                            <li className="col-lg-3 col-6" key={i}>
                                 <>
                                     <div className="projects-inner b-1 br-1 mb-lg-0 mb-4">
                                         <img src={BACKEND_URL+v.images[0]} alt="project_img" className="img-fluid img-br-1" style={{height:'200px', width: '100%', objectFit:'cover'}}/>

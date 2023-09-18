@@ -42,10 +42,10 @@ const Chat = () => {
         fetchdata();
         fetchdata2();
 
-        const other = document.getElementById('other');
-        other.addEventListener('click',()=>{
-            document.getElementById('drop').classList.toggle('d-none');
-        });
+        // const other = document.getElementById('other');
+        // other.addEventListener('click',()=>{
+        //     document.getElementById('drop').classList.toggle('d-none');
+        // });
 
         socket.on('load_chat',(data)=>{
             setchat((v)=>{
@@ -104,14 +104,14 @@ const Chat = () => {
         }
     }
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         setFile(e.target.files[0]);
-    };
+    // };
 
-    const handleFileUpload = async (e) => {
+    // const handleFileUpload = async (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('img',file);
+        formData.append('img',e.target.files[0]);
         formData.append('senderId', loginData._id);
         formData.append('receiverId', id);
         let data = await axios.post(BACKEND_URL+'chat/upload_img', formData);
@@ -120,10 +120,14 @@ const Chat = () => {
         }
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[]);
+
     return (
         <>
             <Header />
-            <section className="gigs py-5 mt-5">
+            <section className="gigs pt-5 mt-5">
                 <div className="container">
                     <div className="header pb-3" id="header">
                         <div className="d-flex details align-items-center justify-content-between" id="details" style={{cursor:'pointer'}} data-id={data._id}>
@@ -134,19 +138,19 @@ const Chat = () => {
                                 <p className="mb-0">Backend Developer</p>
                                 </div>
                             </div>
-                            <span className="postion-relative text-dark" id='other'><i className="bi bi-three-dots"></i>
-                                <div className="position-absolute shadow-lg d-none p-3 bg-white" style={{borderRadius :'10px'}} id='drop'>
+                            {/* <span className="postion-relative text-dark" id='other'><i className="bi bi-three-dots"></i>
+                                <div className="position-absolute shadow-lg d-none p-3 bg-white" id='drop'>
                                     <ul className="ps-0 mb-0">
                                         <li className='py-1' key={'copy'}><Link to="/" className='text-dark'>Copy</Link></li>
                                         <li className='py-1' key={'clear'}><Link to="/" className='text-dark'>Clear All Chats</Link></li>
                                     </ul>
                                 </div>
-                            </span>
+                            </span> */}
                         </div>
                     </div>
-                    <div className='shadow-lg p-5'>
+                    <div className='shadow-lg py-5 px-4'>
                         <div id="chat-box" className="mb-5" style={{height: '600px', overflowY: 'auto'}}>
-                            <ul id="chats" className="mb-0 ps-0 pe-5 h-100">
+                            <ul id="chats" className="mb-0 ps-0 pe-4 h-100">
                                 {chat.length > 0 ? chat.map((v,i)=>{
                                     if(v.senderId === loginData._id){
                                         if(v.img){
@@ -181,13 +185,13 @@ const Chat = () => {
                                 }) : <h3 className='text-center h-100 w-100 d-flex align-items-center justify-content-center'>Start Chating Now...</h3>}
                             </ul>
                         </div>
-                        <div className='d-flex'>
-                            <form id="form" method='post' onSubmit={formSubmit} style={{width : '80%'}}>
+                        <div className='d-flex flex-wrap'>
+                            <form id="form" method='post' onSubmit={formSubmit} style={{width : '88.5%'}}>
                                 <input type="text" name="msg" id="msg" onChange={getMsg} className="col-12 form-control py-2 px-3 fs-5" placeholder="Enter any Texts ........." />
                             </form>
-                            <form method='post' encType='multipart/form-data' className='d-flex' style={{width : '20%'}}>
-                                <input type="file" id="siofu_input" className='form-control py-2 px-3 fs-5' style={{width : '58.66%'}} onChange={handleFileChange}/>
-                                <input type='submit' className="btn btn-primary py-2" onClick={handleFileUpload} style={{width : '42.33%'}} />
+                            <form method='post' encType='multipart/form-data' className='d-flex flex-wrap' style={{width : '11.5%'}}>
+                                <input type="file" id="siofu_input" className='form-control py-2 px-3 fs-5' onChange={handleFileChange}/>
+                                {/* <input type='submit' className="btn btn-primary py-2" onClick={handleFileUpload} style={{width : '43%'}} /> */}
                             </form>
                         </div>
                     </div>

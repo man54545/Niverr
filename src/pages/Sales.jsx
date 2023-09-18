@@ -35,6 +35,7 @@ const Sales = () => {
     }
 
     useEffect(()=>{
+        window.scrollTo(0, 0);
         fetchdata();
         fetchdata2();
     },[]);
@@ -46,38 +47,40 @@ const Sales = () => {
   return (
     <>
         <Header />
-        <section className="gigs py-5 mt-5">
+        <section className="gigs pt-5 mt-5">
             <div className="container">
                 <div className="d-flex flex-wrap align-items-center justify-content-between">
                     <h2 className="mb-0 fw-8">{gdata.title}</h2>
                     <Link to="/gigs" className="bg-color-2 btn text-white border-0 py-2 px-3">View All Gig</Link>
                 </div>
-                <table className="w-100 table table-striped mt-5">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Payment</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((v,i)=>{
-                            return (
-                                <tr key={i}>
-                                    <td><img src={BACKEND_URL+v.gigId.images[0]} width="50px" alt="gigs_img" /></td>
-                                    <td style={{textTransform:'capitalize'}}>{v.buyerId.username}</td>
-                                    <td>{gdata.cat}</td>
-                                    <td>$ {v.gigId.price}</td>
-                                    <td>$ {v.payment}</td>
-                                    <td>{new Date(v.createdAt).getDate()} {new Date(v.createdAt).toLocaleString('default', { month: 'long' })} {new Date(v.createdAt).getFullYear()}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                <div className='scrollbar' style={{overflowX: 'auto'}}>
+                    <table className="table table-striped mt-5"  style={{minWidth: '750px'}}>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Payment</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((v,i)=>{
+                                return (
+                                    <tr key={i}>
+                                        <td><img src={BACKEND_URL+v.gigId.images[0]} width="50px" alt="gigs_img" /></td>
+                                        <td style={{textTransform:'capitalize'}}>{v.buyerId.username}</td>
+                                        <td>{gdata.cat}</td>
+                                        <td>$ {v.gigId.price}</td>
+                                        <td>$ {v.payment}</td>
+                                        <td>{new Date(v.createdAt).getDate()} {new Date(v.createdAt).toLocaleString('default', { month: 'long' })} {new Date(v.createdAt).getFullYear()}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
         <Footer />
